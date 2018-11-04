@@ -1,0 +1,8 @@
+
+install:
+
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe" "C:\Projects\HiEfficiency Bar\OrdersService\OrdersService\OrdersService\bin\Release\OrdersService.exe"
+
+uninstall:
+
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe" /u "C:\Projects\HiEfficiency Bar\OrdersService\OrdersService\OrdersService\bin\Release\OrdersService.exe"
