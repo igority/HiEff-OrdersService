@@ -29,11 +29,11 @@ namespace OrdersService
             changeRobotStatusUrl = ConfigurationManager.AppSettings["ChangeRobotStatusUrl"];
             webSocketUrl = ConfigurationManager.AppSettings["WebSocketUrl"];
 
-            _accountSid = "robot@hiefficiencybar.com";
-            _secretKey = "password1231";
+           // _accountSid = "robot@hiefficiencybar.com";
+           // _secretKey = "password1231";
 
             _accountSid = ConfigurationManager.AppSettings["Username"];
-            _accountSid = ConfigurationManager.AppSettings["Password"];
+            _secretKey = ConfigurationManager.AppSettings["Password"];
 
         }
 

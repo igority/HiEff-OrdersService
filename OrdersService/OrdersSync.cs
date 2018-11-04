@@ -87,7 +87,8 @@ namespace OrdersService
         public void SyncOrders()
         {
             HiEffAPI hieffapi = new HiEffAPI();
-            hieffapi.GetOrders();
+            List<Order> orders = hieffapi.GetOrders();
+
         }
 
         private void SchedularCallback(object e)
