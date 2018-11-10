@@ -54,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HiEffAPI.cs" />
+    <Compile Include="Models\IngredientDetail.cs" />
+    <Compile Include="Models\Glass.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\Drink.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\OrdersObj.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="OrdersSync.cs">
       <SubType>Component</SubType>

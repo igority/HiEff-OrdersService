@@ -60,35 +60,11 @@ namespace OrdersService
             request.Resource = currentFIFOUrl;
             request.RootElement = "Order";
 
-            //request.AddParameter("CallSid", callSid, ParameterType.UrlSegment);
-
-            return Execute<List<Order>>(request);
-        }
-    }
-
-
-
-    // TwilioApi.cs
-    public class TwilioApi
-    {
-        const string BaseUrl = "https://api.twilio.com/2008-08-01";
-
-        readonly string _accountSid;
-        readonly string _secretKey;
-
-        public TwilioApi(string accountSid, string secretKey)
-        {
-            _accountSid = "robot@hiefficiencybar.com";
-            _secretKey = "robot1231";
-        }
-
-        public T Execute<T>(RestRequest request) where T : new()
-        {
             var client = new RestClient();
-            client.BaseUrl = new System.Uri(BaseUrl);
+            client.BaseUrl = new System.Uri(apiUrlBase);
             client.Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey);
             request.AddParameter("AccountSid", _accountSid, ParameterType.UrlSegment); // used on every request
-            var response = client.Execute<T>(request);
+            var response = client.Execute<OrdersObj>(request);
 
             if (response.ErrorException != null)
             {
@@ -96,8 +72,13 @@ namespace OrdersService
                 var myException = new ApplicationException(message, response.ErrorException);
                 throw myException;
             }
-            return response.Data;
-        }
+            List<Order> orders = response.Data.results;
+            return orders;
+            //return response.Data;
 
+            //request.AddParameter("CallSid", callSid, ParameterType.UrlSegment);
+
+           // return Execute<List<Order>>(request);
+        }
     }
 }
