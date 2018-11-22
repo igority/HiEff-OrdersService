@@ -12,6 +12,7 @@ using System.Threading;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Net;
+using OrdersServices.Clients;
 
 namespace OrdersService
 {
@@ -62,7 +63,7 @@ namespace OrdersService
                     }
                 }
 
-                SyncOrders();
+                SyncOrdersAsync();
 
                 TimeSpan timeSpan = scheduledTime.Subtract(DateTime.Now);
                 string schedule = string.Format("{0} day(s) {1} hour(s) {2} minute(s) {3} seconds(s)", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
@@ -84,10 +85,23 @@ namespace OrdersService
             }
         }
 
-        public void SyncOrders()
+        public void SyncOrdersAsync()
         {
             HiEffAPI hieffapi = new HiEffAPI();
-            List<Order> orders = hieffapi.GetOrders();
+            //List<Order> orders = hieffapi.GetOrders();
+            string orders_json = hieffapi.GetOrdersJSON();
+            var orders = hieffapi.GetOrders();
+            DBClient dbClient = new DBClient();
+            try
+            {
+                dbClient.WriteOrders(orders_json);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
 
         }
 

@@ -23,7 +23,7 @@ namespace OrdersService
             ServiceBase.Run(ServicesToRun);
 #else
             OrdersSync myServ = new OrdersSync();
-            myServ.SyncOrders();
+            myServ.SyncOrdersAsync();
 #endif
         }
     }

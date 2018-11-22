@@ -80,5 +80,32 @@ namespace OrdersService
 
            // return Execute<List<Order>>(request);
         }
+
+        public string GetOrdersJSON()
+        {
+            var request = new RestRequest();
+            request.Resource = currentFIFOUrl;
+            request.RootElement = "Order";
+
+            var client = new RestClient();
+            client.BaseUrl = new System.Uri(apiUrlBase);
+            client.Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey);
+            request.AddParameter("AccountSid", _accountSid, ParameterType.UrlSegment); // used on every request
+            var response = client.Execute<OrdersObj>(request);
+
+            if (response.ErrorException != null)
+            {
+                const string message = "Error retrieving response.  Check inner details for more info.";
+                var myException = new ApplicationException(message, response.ErrorException);
+                throw myException;
+            }
+            return response.Content;
+            
+            //return response.Data;
+
+            //request.AddParameter("CallSid", callSid, ParameterType.UrlSegment);
+
+            // return Execute<List<Order>>(request);
+        }
     }
 }
